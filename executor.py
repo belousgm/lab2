@@ -74,7 +74,7 @@ for i in answers:
             answers[i] = 'False'
 
 result = []
-with open("anime.csv", newline='', encoding='utf-8') as csvfile:
+with open('anime.csv', newline='', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         row_clone = row.copy()
@@ -83,7 +83,7 @@ with open("anime.csv", newline='', encoding='utf-8') as csvfile:
         for i in row_clone:
             if answers[i] == '':
                 continue
-            if i in 'Rating Score':
+            if i == 'Rating Score':
                 flag_row = return_flag_rating(answers[i], row_clone[i])
             elif i in ['Tags', 'Type', 'Studios'] and flag_row:
                 flag_row = include_in(answers[i], row_clone[i])
@@ -94,7 +94,7 @@ with open("anime.csv", newline='', encoding='utf-8') as csvfile:
         if flag_row:
             result.append(row['Name'])
 
-with open("output.txt", 'w', encoding='utf-8') as answerfile:
+with open('output.txt', 'w', encoding='utf-8') as answerfile:
     for i in result:
         answerfile.write(f'{i}\n')
 
